@@ -1,34 +1,37 @@
 ﻿<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohamed Abbas El Sharif | Data Analyst & AI Specialist</title>
+  
+  <title>M.Abbas | Data & AI</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text x='50' y='52' font-family='sans-serif' font-size='45' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='central'>MA</text></svg>">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     /* ─────────────────────────────────────────────────────────────── */
-    /* DESIGN TOKENS (PIXELIZE NEXT.JS STYLE)                          */
+    /* DESIGN TOKENS & THEMING                                         */
     /* ─────────────────────────────────────────────────────────────── */
     :root {
-      /* Colors */
-      --primary: #4f46e5;       /* Indigo 600 - Main Theme Color */
-      --primary-hover: #4338ca; /* Indigo 700 */
-      --primary-light: #e0e7ff; /* Indigo 100 */
+      /* Base primary colors (stay the same) */
+      --primary: #4f46e5;       
+      --primary-hover: #4338ca; 
       
-      --bg-body: #f8fafc;       /* Slate 50 - Very light gray/blue */
-      --bg-surface: #ffffff;    /* Pure White for cards */
-      
-      --text-main: #0f172a;     /* Slate 900 - Dark text */
-      --text-muted: #64748b;    /* Slate 500 - Gray text */
-      
-      --border-color: #e2e8f0;  /* Slate 200 */
-      
+      /* Light Mode Colors (Default) */
+      --bg-body: #f8fafc;       
+      --bg-surface: #ffffff;    
+      --text-main: #0f172a;     
+      --text-muted: #64748b;    
+      --border-color: #e2e8f0;  
+      --primary-light: #e0e7ff; 
+      --input-bg: #f8fafc;
+
       /* Typography */
-      --font-main: 'Outfit', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+      --font-ar: 'Cairo', sans-serif;
       
       /* Styling */
       --radius-sm: 8px;
@@ -43,728 +46,303 @@
       --transition: all 0.3s ease-in-out;
     }
 
+    /* Dark Mode Colors */
+    [data-theme="dark"] {
+      --primary: #6366f1;       /* Slightly lighter indigo for contrast */
+      --primary-hover: #818cf8; 
+      --bg-body: #0f172a;       /* Slate 900 */
+      --bg-surface: #1e293b;    /* Slate 800 */
+      --text-main: #f8fafc;     /* Slate 50 */
+      --text-muted: #94a3b8;    /* Slate 400 */
+      --border-color: #334155;  /* Slate 700 */
+      --primary-light: #312e81; /* Indigo 900 */
+      --input-bg: #0f172a;
+    }
+
+    /* Language Display Logic */
+    [lang="ar"] { display: none; }
+    html[dir="rtl"] [lang="en"] { display: none; }
+    html[dir="rtl"] [lang="ar"] { display: inline-block; }
+    html[dir="rtl"] p [lang="ar"], html[dir="rtl"] h1 [lang="ar"], html[dir="rtl"] h2 [lang="ar"], html[dir="rtl"] h3 [lang="ar"], html[dir="rtl"] h4 [lang="ar"] { display: block; }
+    html[dir="rtl"] span[lang="ar"] { display: inline; }
+
     /* ─────────────────────────────────────────────────────────────── */
     /* GLOBAL RESETS                                                   */
     /* ─────────────────────────────────────────────────────────────── */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
     body {
-      font-family: var(--font-main);
+      font-family: var(--font-en);
       background-color: var(--bg-body);
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
+    html[dir="rtl"] body {
+      font-family: var(--font-ar);
     }
 
-    ul {
-      list-style: none;
-    }
+    a { text-decoration: none; color: inherit; transition: var(--transition); }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; }
 
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text-main);
-    }
-
-    p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
+    h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--text-main); }
+    p { color: var(--text-muted); font-size: 1.05rem; }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* UTILITIES & LAYOUT                                              */
     /* ─────────────────────────────────────────────────────────────── */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .section {
-      padding: 6rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-    }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 6rem 0; }
+    .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin-inline: auto; }
+    .section-title { font-size: 2.5rem; margin-bottom: 1rem; }
+    .section-subtitle { font-size: 1.1rem; color: var(--text-muted); }
 
     /* Buttons */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.875rem 2rem;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: var(--radius-pill);
-      transition: var(--transition);
-      cursor: pointer;
-      border: 2px solid transparent;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.875rem 2rem; font-weight: 600; font-size: 1rem;
+      border-radius: var(--radius-pill); transition: var(--transition);
+      cursor: pointer; border: 2px solid transparent; gap: 0.5rem;
     }
+    .btn-primary { background-color: var(--primary); color: #fff; }
+    .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); color: #fff;}
+    .btn-outline { background-color: transparent; color: var(--text-main); border-color: var(--border-color); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
-    .btn-primary {
-      background-color: var(--primary);
-      color: #fff;
+    /* Controls (Lang & Theme) */
+    .controls-wrapper { display: flex; align-items: center; gap: 0.5rem; margin-inline-end: 1rem; }
+    .control-btn {
+      background: var(--bg-surface); border: 1px solid var(--border-color);
+      color: var(--text-main); width: 40px; height: 40px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: var(--transition);
     }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--text-main);
-      border-color: var(--border-color);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
+    .control-btn:hover { border-color: var(--primary); color: var(--primary); }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* NAVBAR                                                          */
     /* ─────────────────────────────────────────────────────────────── */
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      transition: var(--transition);
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(var(--bg-surface), 0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color); transition: var(--transition);
     }
+    /* Dynamic background for sticky nav based on theme */
+    [data-theme="light"] header { background: rgba(255, 255, 255, 0.85); }
+    [data-theme="dark"] header { background: rgba(30, 41, 59, 0.85); }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 80px;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--text-main);
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-main);
-    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+    html[dir="rtl"] .logo { letter-spacing: 0; }
+    
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--text-main); }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-right { display: flex; align-items: center; }
+    .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
 
     @media (max-width: 991px) {
-      .nav-links {
-        display: none;
-      }
-      .mobile-toggle {
-        display: block;
-      }
-      .nav-right .btn {
-        display: none;
-      }
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; margin-inline-start: 1rem; }
+      .nav-right .btn-primary { display: none; }
     }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* HERO SECTION                                                    */
     /* ─────────────────────────────────────────────────────────────── */
-    .hero {
-      padding: 12rem 0 8rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
+    .hero { padding: 12rem 0 8rem; text-align: center; position: relative; overflow: hidden; }
     .hero::before {
-      content: '';
-      position: absolute;
-      top: -10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, var(--primary-light) 0%, rgba(255,255,255,0) 70%);
-      z-index: -1;
-      opacity: 0.7;
+      content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px; z-index: -1; opacity: 0.7;
+      background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
     }
-
     .hero-badge {
-      display: inline-block;
-      padding: 0.5rem 1.2rem;
-      background-color: #fff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-pill);
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--primary);
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-sm);
+      display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--bg-surface);
+      border: 1px solid var(--border-color); border-radius: var(--radius-pill);
+      font-size: 0.9rem; font-weight: 500; color: var(--primary); margin-bottom: 2rem; box-shadow: var(--shadow-sm);
     }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -1px; margin-bottom: 1.5rem; max-width: 900px; margin-inline: auto; }
+    html[dir="rtl"] .hero h1 { letter-spacing: 0; }
+    .hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2.5rem; }
+    .hero-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      letter-spacing: -1px;
-      margin-bottom: 1.5rem;
-      max-width: 900px;
-      margin-inline: auto;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* ─────────────────────────────────────────────────────────────── */
-    /* STATS / RECORDS SECTION                                         */
-    /* ─────────────────────────────────────────────────────────────── */
+    /* Stats */
     .stats-wrapper {
-      margin-top: 4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      padding: 3rem;
-      background-color: var(--bg-surface);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-color);
+      margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem; padding: 3rem; background-color: var(--bg-surface); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);
     }
-
-    .stat-item {
-      text-align: center;
-      padding: 1rem;
-    }
-
+    .stat-item { text-align: center; padding: 1rem; }
     .stat-icon {
-      width: 48px;
-      height: 48px;
-      background-color: var(--primary-light);
-      color: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      font-size: 1.5rem;
+      width: 48px; height: 48px; background-color: var(--primary-light); color: var(--primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;
     }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 0.25rem;
-    }
-
-    .stat-text {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem; }
+    .stat-text { font-size: 0.95rem; color: var(--text-muted); }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* ABOUT SECTION                                                   */
     /* ─────────────────────────────────────────────────────────────── */
-    .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
+    .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
     .about-quote {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--primary);
-      padding: 1.5rem 2rem;
-      background: var(--primary-light);
-      border-radius: var(--radius-md);
-      margin: 2rem 0;
-      font-style: italic;
+      font-size: 1.25rem; font-weight: 500; color: var(--primary); padding: 1.5rem 2rem;
+      background: var(--primary-light); border-radius: var(--radius-md); margin: 2rem 0; font-style: italic;
     }
 
     /* ─────────────────────────────────────────────────────────────── */
-    /* EXPERTISE (SERVICES) SECTION                                    */
+    /* EXPERTISE & SERVICES SECTION                                    */
     /* ─────────────────────────────────────────────────────────────── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
     .service-card {
-      background-color: var(--bg-surface);
-      padding: 2.5rem 2rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      transition: var(--transition);
+      background-color: var(--bg-surface); padding: 2.5rem 2rem; border-radius: var(--radius-md);
+      border: 1px solid var(--border-color); transition: var(--transition);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-
-    .service-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-5px);
-      border-color: var(--primary-light);
-    }
-
+    .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-5px); border-color: var(--primary-light); }
     .service-card .icon {
-      width: 60px;
-      height: 60px;
-      background-color: var(--primary-light);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+      width: 60px; height: 60px; background-color: var(--primary-light); border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.5rem;
     }
-
-    .service-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
+    .service-card h3 { font-size: 1.3rem; margin-bottom: 1rem; }
 
     /* ─────────────────────────────────────────────────────────────── */
-    /* POPULAR PROJECTS SECTION                                        */
+    /* PROJECTS SECTION                                                */
     /* ─────────────────────────────────────────────────────────────── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
     .project-card {
-      background-color: var(--bg-surface);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
+      background-color: var(--bg-surface); border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid var(--border-color); transition: var(--transition); display: flex; flex-direction: column;
     }
-
-    .project-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-5px);
-    }
-
+    .project-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-5px); }
     .project-img {
-      height: 240px;
-      background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: var(--primary);
-      opacity: 0.8;
+      height: 240px; background: linear-gradient(135deg, #e0e7ff 0%, var(--border-color) 100%);
+      display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--primary); opacity: 0.8;
     }
-
     .project-content {
-      padding: 2rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+      padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-
-    .project-content h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-content p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
+    .project-content h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+    .project-content p { font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
     .project-tag {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      font-size: 0.8rem;
-      font-weight: 600;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border-color);
-      margin-bottom: 1rem;
+      display: inline-block; padding: 0.25rem 0.75rem; background-color: var(--bg-body); color: var(--text-main);
+      font-size: 0.8rem; font-weight: 600; border-radius: var(--radius-pill); border: 1px solid var(--border-color); margin-bottom: 1rem;
     }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      font-weight: 600;
-      color: var(--primary);
-      gap: 0.5rem;
-    }
-
-    .project-link:hover {
-      text-decoration: underline;
-    }
+    .project-link { display: inline-flex; align-items: center; font-weight: 600; color: var(--primary); gap: 0.5rem; }
+    .project-link:hover { text-decoration: underline; }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* TIMELINE (EXPERIENCE & EDUCATION)                               */
     /* ─────────────────────────────────────────────────────────────── */
-    .timeline-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    @media (min-width: 900px) {
-      .timeline-container {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
+    .timeline-container { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+    @media (min-width: 900px) { .timeline-container { grid-template-columns: 1fr 1fr; } }
     .timeline-box {
-      background-color: var(--bg-surface);
-      padding: 3rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-sm);
+      background-color: var(--bg-surface); padding: 3rem; border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
     }
-
-    .timeline-box h3 {
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 2rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
+    .timeline-box h3 { font-size: 1.8rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .timeline-item { position: relative; padding-inline-start: 2rem; margin-bottom: 2.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
     .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: -2.5rem;
-      width: 2px;
-      background-color: var(--border-color);
+      content: ''; position: absolute; inset-inline-start: 0; top: 0; bottom: -2.5rem;
+      width: 2px; background-color: var(--border-color);
     }
-
-    .timeline-item:last-child::before {
-      display: none;
-    }
-
+    .timeline-item:last-child::before { display: none; }
     .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: 6px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--primary);
-      border: 2px solid #fff;
+      content: ''; position: absolute; inset-inline-start: -4px; top: 6px; width: 10px; height: 10px;
+      border-radius: 50%; background-color: var(--primary); border: 2px solid var(--bg-surface);
     }
-
     .time-badge {
-      display: inline-block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      background-color: var(--primary-light);
-      padding: 0.2rem 0.8rem;
-      border-radius: var(--radius-pill);
-      margin-bottom: 0.5rem;
+      display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--primary);
+      background-color: var(--primary-light); padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); margin-bottom: 0.5rem;
     }
-
-    .timeline-item h4 {
-      font-size: 1.2rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-item .company {
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      display: block;
-      font-size: 0.95rem;
-    }
+    .timeline-item h4 { font-size: 1.2rem; margin-bottom: 0.25rem; }
+    .timeline-item .company { font-weight: 500; color: var(--text-main); margin-bottom: 0.5rem; display: block; font-size: 0.95rem; }
 
     /* ─────────────────────────────────────────────────────────────── */
-    /* CATEGORIES / SKILLS SECTION                                     */
+    /* SKILLS SECTION                                                  */
     /* ─────────────────────────────────────────────────────────────── */
-    .skills-section {
-      background-color: var(--bg-surface);
-      padding: 6rem 0;
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
+    .skills-section { background-color: var(--bg-surface); padding: 6rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
     .skill-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.5rem;
-      background-color: var(--bg-body);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-pill);
-      font-weight: 500;
-      transition: var(--transition);
+      display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background-color: var(--bg-body);
+      border: 1px solid var(--border-color); border-radius: var(--radius-pill); font-weight: 500; transition: var(--transition);
     }
-
-    .skill-item:hover {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .check-icon {
-      color: var(--primary);
-      font-weight: bold;
-    }
+    .skill-item:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+    .check-icon { color: var(--primary); font-weight: bold; }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* CONTACT SECTION                                                 */
     /* ─────────────────────────────────────────────────────────────── */
     .contact-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4rem;
-      background-color: var(--bg-surface);
-      padding: 4rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-lg);
+      display: grid; grid-template-columns: 1fr; gap: 4rem; background-color: var(--bg-surface);
+      padding: 4rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);
     }
-
-    @media (min-width: 900px) {
-      .contact-container {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .contact-info h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .info-list li {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-
+    @media (min-width: 900px) { .contact-container { grid-template-columns: 1fr 1fr; } }
+    .contact-info h3 { font-size: 2rem; margin-bottom: 1rem; }
+    .info-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 500; }
     .info-icon {
-      width: 40px;
-      height: 40px;
-      background-color: var(--bg-body);
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
+      width: 40px; height: 40px; background-color: var(--bg-body); border: 1px solid var(--border-color);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);
     }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 1rem 1.5rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      font-family: inherit; font-size: 1rem; background-color: var(--input-bg); color: var(--text-main); transition: var(--transition);
     }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      font-family: inherit;
-      font-size: 1rem;
-      background-color: var(--bg-body);
-      transition: var(--transition);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-light);
-    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* FOOTER                                                          */
     /* ─────────────────────────────────────────────────────────────── */
-    footer {
-      background-color: var(--text-main);
-      color: #fff;
-      padding: 4rem 0 2rem;
-    }
-
-    .footer-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-brand h2 {
-      font-size: 1.8rem;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-    .footer-brand p {
-      color: #94a3b8;
-    }
-
-    .footer-links h4 {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: #fff;
-    }
-
-    .footer-links ul li {
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-links a {
-      color: #94a3b8;
-    }
-
-    .footer-links a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid #334155;
-      padding-top: 2rem;
-      text-align: center;
-      color: #94a3b8;
-      font-size: 0.95rem;
-    }
+    footer { background-color: #0f172a; color: #fff; padding: 4rem 0 2rem; }
+    .footer-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand h2 { font-size: 1.8rem; color: #fff; margin-bottom: 1rem; }
+    .footer-brand p { color: #94a3b8; }
+    .footer-links h4 { font-size: 1.2rem; margin-bottom: 1.5rem; color: #fff; }
+    .footer-links ul li { margin-bottom: 0.8rem; }
+    .footer-links a { color: #94a3b8; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #334155; padding-top: 2rem; text-align: center; color: #94a3b8; font-size: 0.95rem; }
 
     /* ─────────────────────────────────────────────────────────────── */
     /* ANIMATIONS                                                      */
     /* ─────────────────────────────────────────────────────────────── */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .section { padding: 4rem 0; }
-      .hero { padding: 8rem 0 4rem; }
-      .stats-wrapper { padding: 2rem; }
-      .contact-container { padding: 2rem; }
-    }
+    .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) { .section { padding: 4rem 0; } .hero { padding: 8rem 0 4rem; } .stats-wrapper { padding: 2rem; } .contact-container { padding: 2rem; } }
   </style>
 </head>
 <body>
 
   <header id="header">
     <div class="container nav-container">
-      <a href="#" class="logo">M.Abbas El Sharif</a>
+      <a href="#" class="logo">
+        <span lang="en">M.Abbas El Sharif</span>
+        <span lang="ar">م. عباس الشريف</span>
+      </a>
       
       <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
+        <a href="#about"><span lang="en">About</span><span lang="ar">نبذة عني</span></a>
+        <a href="#services"><span lang="en">Expertise</span><span lang="ar">خبراتي</span></a>
+        <a href="#projects"><span lang="en">Projects</span><span lang="ar">مشاريعي</span></a>
+        <a href="#experience"><span lang="en">Experience</span><span lang="ar">الخبرة</span></a>
+        <a href="#education"><span lang="en">Education</span><span lang="ar">التعليم</span></a>
+        <a href="#skills"><span lang="en">Skills</span><span lang="ar">المهارات</span></a>
       </nav>
 
       <div class="nav-right">
-        <a href="#contact" class="btn btn-primary">Contact Me</a>
+        <div class="controls-wrapper">
+          <button class="control-btn" id="langToggle" title="Toggle Language">ع</button>
+          <button class="control-btn" id="themeToggle" title="Toggle Theme">🌙</button>
+        </div>
+        <a href="#contact" class="btn btn-primary">
+          <span lang="en">Contact Me</span><span lang="ar">تواصل معي</span>
+        </a>
         <button class="mobile-toggle">☰</button>
       </div>
     </div>
@@ -773,35 +351,55 @@
   <main>
     <section class="hero">
       <div class="container fade-in-up">
-        <span class="hero-badge">Available for Work</span>
-        <h1>Mohamed Abbas El Sharif<br>Data Analyst & AI Specialist</h1>
-        <p>From data, I read the story… your challenges, strengths, and the opportunities others fail to see. Transforming raw data into meaningful insights.</p>
+        <span class="hero-badge">
+          <span lang="en">Available for Work</span><span lang="ar">متاح للعمل</span>
+        </span>
+        <h1>
+          <span lang="en">Mohamed Abbas El Sharif<br>Data Analyst & AI Specialist</span>
+          <span lang="ar">محمد عباس الشريف<br>محلل بيانات وأخصائي ذكاء اصطناعي</span>
+        </h1>
+        <p>
+          <span lang="en">From data, I read the story… your challenges, strengths, and the opportunities others fail to see. Transforming raw data into meaningful insights.</span>
+          <span lang="ar">من بين الأرقام، أستخرج القصة... أقرأ التحديات، ونقاط القوة، والفرص التي قد يغفل عنها الآخرون. أحول البيانات الخام إلى رؤى وقرارات ناجحة.</span>
+        </p>
         
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">Explore Projects</a>
-          <a href="#contact" class="btn btn-outline">Contact Me</a>
+          <a href="#projects" class="btn btn-primary">
+            <span lang="en">Explore Projects</span><span lang="ar">تصفح مشاريعي</span>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <span lang="en">Contact Me</span><span lang="ar">تواصل معي</span>
+          </a>
         </div>
 
         <div class="stats-wrapper fade-in-up">
           <div class="stat-item">
             <div class="stat-icon">🎓</div>
             <div class="stat-number">MSc</div>
-            <div class="stat-text">Data Science Candidate</div>
+            <div class="stat-text">
+              <span lang="en">Data Science Candidate</span><span lang="ar">باحث ماجستير بيانات</span>
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">📊</div>
             <div class="stat-number">10+</div>
-            <div class="stat-text">Projects Delivered</div>
+            <div class="stat-text">
+              <span lang="en">Projects Delivered</span><span lang="ar">مشاريع مُنجزة</span>
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">🏢</div>
             <div class="stat-number">70+</div>
-            <div class="stat-text">Companies Supported</div>
+            <div class="stat-text">
+              <span lang="en">Companies Supported</span><span lang="ar">شركات تم دعمها</span>
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">🛠️</div>
             <div class="stat-number">5+</div>
-            <div class="stat-text">Advanced Tools Mastered</div>
+            <div class="stat-text">
+              <span lang="en">Advanced Tools</span><span lang="ar">أدوات احترافية</span>
+            </div>
           </div>
         </div>
       </div>
@@ -810,18 +408,33 @@
     <section id="about" class="section" style="background-color: var(--bg-surface);">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">About Me</h2>
-          <p class="section-subtitle">A brief look into my background and philosophy.</p>
+          <h2 class="section-title">
+            <span lang="en">About Me</span><span lang="ar">نبذة عني</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">A brief look into my background and philosophy.</span>
+            <span lang="ar">نظرة سريعة على خلفيتي المهنية وفلسفتي في العمل.</span>
+          </p>
         </div>
         <div class="about-content fade-in-up">
-          <p style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.5rem;">I'm a Data Analyst & AI Specialist passionate about transforming raw data into actionable insights. With a strong foundation in data science, business intelligence, and modern AI applications, I help organizations uncover hidden patterns, optimize operations, and make data-driven decisions.</p>
-          <p style="margin-bottom: 1.5rem;">My experience spans technical support for SaaS platforms, production planning and analytics, and hands-on work with advanced analytics tools like Power BI, Python, and SQL. I thrive at the intersection of data, technology, and business strategy—connecting technical solutions to real-world problems.</p>
+          <p style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <span lang="en">I'm a Data Analyst & AI Specialist passionate about transforming raw data into actionable insights. With a strong foundation in data science, business intelligence, and modern AI applications, I help organizations uncover hidden patterns, optimize operations, and make data-driven decisions.</span>
+            <span lang="ar">أنا محلل بيانات وأخصائي ذكاء اصطناعي، شغوف بتحويل البيانات الخام إلى رؤى قابلة للتنفيذ. بفضل خلفيتي القوية في علوم البيانات، وذكاء الأعمال، وتطبيقات الذكاء الاصطناعي، أساعد المؤسسات على اكتشاف الأنماط المخفية، وتحسين العمليات، واتخاذ قرارات تعتمد على البيانات.</span>
+          </p>
+          <p style="margin-bottom: 1.5rem;">
+            <span lang="en">My experience spans technical support for SaaS platforms, production planning and analytics, and hands-on work with advanced analytics tools like Power BI, Python, and SQL. I thrive at the intersection of data, technology, and business strategy.</span>
+            <span lang="ar">تمتد خبرتي لتشمل الدعم الفني لمنصات SaaS، وتخطيط الإنتاج والتحليل، والعمل المباشر مع أدوات التحليل المتقدمة مثل Power BI و Python و SQL. أتألق في الربط بين البيانات، التكنولوجيا، واستراتيجية الأعمال.</span>
+          </p>
           
           <blockquote class="about-quote">
-            "Data doesn't lie. The challenge is knowing how to listen to it, interpret it correctly, and communicate what it means for your business."
+            <span lang="en">"Data doesn't lie. The challenge is knowing how to listen to it, interpret it correctly, and communicate what it means for your business."</span>
+            <span lang="ar">"البيانات لا تكذب. التحدي الحقيقي يكمن في كيفية الاستماع إليها، وتفسيرها بشكل صحيح، وتوضيح ما تعنيه لنجاح عملك."</span>
           </blockquote>
           
-          <p>Currently pursuing an MSc in Data Science at Cairo University while continuously learning and building solutions that bridge the gap between raw data and strategic business decisions.</p>
+          <p>
+            <span lang="en">Currently pursuing an MSc in Data Science at Cairo University while continuously learning and building solutions that bridge the gap between raw data and strategic business decisions.</span>
+            <span lang="ar">أكمل حالياً دراسة الماجستير في علوم البيانات بجامعة القاهرة، مع الاستمرار في التعلم وبناء الحلول التي تسد الفجوة بين البيانات الخام والقرارات الاستراتيجية.</span>
+          </p>
         </div>
       </div>
     </section>
@@ -829,151 +442,162 @@
     <section id="services" class="section">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">My Expertise</h2>
-          <p class="section-subtitle">Crafting analytical strategies that elevate your business, optimize operations, and drive real results.</p>
+          <h2 class="section-title">
+            <span lang="en">My Expertise</span><span lang="ar">خبراتي وخدماتي</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">Crafting analytical strategies that elevate your business, optimize operations, and drive real results.</span>
+            <span lang="ar">بناء استراتيجيات تحليلية ترتقي بعملك، وتحسن العمليات، وتحقق نتائج ملموسة.</span>
+          </p>
         </div>
 
         <div class="services-grid">
           <div class="service-card fade-in-up">
             <div class="icon">📈</div>
-            <h3>Data Analysis & Insights</h3>
-            <p>Deep dive into your data to uncover trends, patterns, and actionable insights that drive business decisions.</p>
+            <h3><span lang="en">Data Analysis & Insights</span><span lang="ar">تحليل البيانات واستخراج الرؤى</span></h3>
+            <p><span lang="en">Deep dive into your data to uncover trends, patterns, and actionable insights that drive business decisions.</span><span lang="ar">التعمق في بياناتك لاكتشاف الاتجاهات والأنماط، واستخراج رؤى قابلة للتنفيذ تدعم قرارات العمل.</span></p>
           </div>
           <div class="service-card fade-in-up" style="transition-delay: 100ms;">
             <div class="icon">📊</div>
-            <h3>Power BI Dashboards</h3>
-            <p>Custom interactive dashboards and reporting solutions for KPI tracking and performance monitoring.</p>
+            <h3><span lang="en">Power BI Dashboards</span><span lang="ar">لوحات تحكم Power BI</span></h3>
+            <p><span lang="en">Custom interactive dashboards and reporting solutions for KPI tracking and performance monitoring.</span><span lang="ar">تصميم لوحات تحكم تفاعلية مخصصة وحلول تقارير لتتبع مؤشرات الأداء الرئيسية (KPIs) ومراقبة الأداء.</span></p>
           </div>
           <div class="service-card fade-in-up" style="transition-delay: 200ms;">
             <div class="icon">🤖</div>
-            <h3>AI-Assisted Solutions</h3>
-            <p>Build and deploy custom AI assistants, automation workflows, and AI-powered tools tailored to your needs.</p>
+            <h3><span lang="en">AI-Assisted Solutions</span><span lang="ar">حلول الذكاء الاصطناعي</span></h3>
+            <p><span lang="en">Build and deploy custom AI assistants, automation workflows, and AI-powered tools tailored to your needs.</span><span lang="ar">بناء ونشر مساعدين أذكياء مخصصين، وأتمتة سير العمل، وأدوات مدعومة بالذكاء الاصطناعي مصممة لاحتياجاتك.</span></p>
           </div>
           <div class="service-card fade-in-up">
             <div class="icon">💡</div>
-            <h3>Custom GPT Development</h3>
-            <p>Develop specialized GPT models trained on your data, SOPs, and domain knowledge for task automation.</p>
+            <h3><span lang="en">Custom GPT Development</span><span lang="ar">تطوير نماذج GPT مخصصة</span></h3>
+            <p><span lang="en">Develop specialized GPT models trained on your data, SOPs, and domain knowledge for task automation.</span><span lang="ar">تطوير نماذج GPT متخصصة ومدربة على بياناتك، وإجراءات التشغيل القياسية (SOPs) لأتمتة المهام.</span></p>
           </div>
           <div class="service-card fade-in-up" style="transition-delay: 100ms;">
             <div class="icon">💾</div>
-            <h3>SQL Optimization</h3>
-            <p>Query optimization, database design, and SQL development for efficient data management.</p>
+            <h3><span lang="en">SQL Optimization</span><span lang="ar">تحسين قواعد البيانات SQL</span></h3>
+            <p><span lang="en">Query optimization, database design, and SQL development for efficient data management.</span><span lang="ar">تحسين استعلامات قواعد البيانات، وتصميم الهيكلة، وتطوير أكواد SQL لإدارة البيانات بكفاءة.</span></p>
           </div>
           <div class="service-card fade-in-up" style="transition-delay: 200ms;">
             <div class="icon">🐍</div>
-            <h3>Python Processing</h3>
-            <p>Automate data workflows, build data pipelines, and create custom Python solutions for complex analytics.</p>
+            <h3><span lang="en">Python Processing</span><span lang="ar">معالجة البيانات بـ Python</span></h3>
+            <p><span lang="en">Automate data workflows, build data pipelines, and create custom Python solutions for complex analytics.</span><span lang="ar">أتمتة سير عمل البيانات، وبناء خطوط الأنابيب، وإنشاء حلول Python مخصصة للتحليلات المعقدة.</span></p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="section" style="background-color: #fff;">
+    <section id="projects" class="section" style="background-color: var(--bg-body);">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">Popular Projects</h2>
-          <p class="section-subtitle">Presenting Next-Generation Data Solutions. Analyze, Innovate, and Elevate.</p>
+          <h2 class="section-title">
+            <span lang="en">Popular Projects</span><span lang="ar">أبرز المشاريع</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">Presenting Next-Generation Data Solutions. Analyze, Innovate, and Elevate.</span>
+            <span lang="ar">أقدم لك حلول بيانات من الجيل القادم. تحليل، ابتكار، وارتقاء.</span>
+          </p>
         </div>
 
         <div class="projects-grid">
           <div class="project-card fade-in-up">
             <div class="project-img">🛒</div>
             <div class="project-content">
-              <span class="project-tag">E-Commerce</span>
-              <h3>Olist Data Analysis</h3>
-              <p>Analyzed Olist e-commerce data using SQL, Python, and Power BI dashboards to uncover trends and deliver actionable insights for sales and operations.</p>
-              <a href="#" class="project-link">View Details →</a>
+              <span class="project-tag"><span lang="en">E-Commerce</span><span lang="ar">تجارة إلكترونية</span></span>
+              <h3><span lang="en">Olist Data Analysis</span><span lang="ar">تحليل بيانات Olist</span></h3>
+              <p><span lang="en">Analyzed Olist e-commerce data using SQL, Python, and Power BI dashboards to uncover trends and deliver actionable insights.</span><span lang="ar">تحليل بيانات المتجر الإلكتروني Olist باستخدام SQL، وPython، ولوحات تحكم Power BI لاكتشاف الاتجاهات وتقديم رؤى للعمليات.</span></p>
+              <a href="#" class="project-link"><span lang="en">View Details →</span><span lang="ar">عرض التفاصيل ←</span></a>
             </div>
           </div>
 
           <div class="project-card fade-in-up" style="transition-delay: 100ms;">
             <div class="project-img">📚</div>
             <div class="project-content">
-              <span class="project-tag">Open Source</span>
-              <h3>SQL Mastery Documentation</h3>
-              <p>Built an open-source GitHub project with practical examples, structured chapters, and a complete SQL cheat sheet for Arabic speakers.</p>
-              <a href="https://github.com/mabbaas22/sql-mastery" target="_blank" class="project-link">View on GitHub →</a>
+              <span class="project-tag"><span lang="en">Open Source</span><span lang="ar">مفتوح المصدر</span></span>
+              <h3><span lang="en">SQL Mastery Documentation</span><span lang="ar">توثيق احتراف SQL</span></h3>
+              <p><span lang="en">Built an open-source GitHub project with practical examples, structured chapters, and a complete SQL cheat sheet for Arabic speakers.</span><span lang="ar">بناء مشروع مفتوح المصدر على GitHub يحتوي على أمثلة عملية، وفصول منظمة، ودليل مرجعي كامل لـ SQL للمتحدثين بالعربية.</span></p>
+              <a href="https://github.com/mabbaas22/sql-mastery" target="_blank" class="project-link"><span lang="en">View on GitHub →</span><span lang="ar">عرض على جيت هب ←</span></a>
             </div>
           </div>
 
           <div class="project-card fade-in-up">
             <div class="project-img">🧠</div>
             <div class="project-content">
-              <span class="project-tag">AI Assistant</span>
-              <h3>Production AI Assistant</h3>
-              <p>Built and deployed Custom GPT trained on internal SOPs and case history, reducing repetitive queries by ~30% and boosting speed.</p>
-              <a href="#" class="project-link">Private Project 🔒</a>
+              <span class="project-tag"><span lang="en">AI Assistant</span><span lang="ar">مساعد ذكي</span></span>
+              <h3><span lang="en">Production AI Assistant</span><span lang="ar">المساعد الذكي للإنتاج</span></h3>
+              <p><span lang="en">Built and deployed Custom GPT trained on internal SOPs and case history, reducing repetitive queries by ~30% and boosting speed.</span><span lang="ar">بناء ونشر نموذج GPT مخصص تم تدريبه على إجراءات التشغيل الداخلية (SOPs) وسجل الحالات، مما قلل الاستفسارات المتكررة بنسبة ~30%.</span></p>
+              <a href="#" class="project-link"><span lang="en">Private Project 🔒</span><span lang="ar">مشروع خاص 🔒</span></a>
             </div>
           </div>
 
           <div class="project-card fade-in-up" style="transition-delay: 100ms;">
             <div class="project-img">🏥</div>
             <div class="project-content">
-              <span class="project-tag">Deep Learning</span>
-              <h3>Bone Cancer Detection</h3>
-              <p>Built a CNN deep learning model for bone tumor detection with a Flask web interface and treatment recommendation system.</p>
-              <a href="#" class="project-link">Private Project 🔒</a>
+              <span class="project-tag"><span lang="en">Deep Learning</span><span lang="ar">تعلم عميق</span></span>
+              <h3><span lang="en">Bone Cancer Detection</span><span lang="ar">الكشف عن سرطان العظام</span></h3>
+              <p><span lang="en">Built a CNN deep learning model for bone tumor detection with a Flask web interface and treatment recommendation system.</span><span lang="ar">بناء نموذج تعلم عميق (CNN) للكشف عن أورام العظام مع واجهة ويب باستخدام Flask ونظام لتوصيات العلاج المبكر.</span></p>
+              <a href="#" class="project-link"><span lang="en">Private Project 🔒</span><span lang="ar">مشروع خاص 🔒</span></a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" style="background-color: var(--bg-body);">
+    <section class="section" style="background-color: var(--bg-surface);">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">Resume Overview</h2>
-          <p class="section-subtitle">My professional journey and academic background.</p>
+          <h2 class="section-title">
+            <span lang="en">Resume Overview</span><span lang="ar">السيرة الذاتية</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">My professional journey and academic background.</span>
+            <span lang="ar">رحلتي المهنية وخلفيتي الأكاديمية.</span>
+          </p>
         </div>
 
         <div class="timeline-container">
           <div id="experience" class="timeline-box fade-in-up">
-            <h3>💼 Work Experience</h3>
+            <h3>💼 <span lang="en">Work Experience</span><span lang="ar">الخبرة العملية</span></h3>
             <div class="timeline-item">
-              <span class="time-badge">Nov 2025 – Apr 2026</span>
-              <h4>Technical Support Engineer</h4>
-              <span class="company">BeOn (B2B SaaS) • Cairo</span>
-              <p>Diagnosed technical issues across WhatsApp API and CRMs. Dedicated to client success by supporting 70+ B2B companies, assisting them with both our core services and broader technical guidance to ensure their overall business growth and success.</p>
+              <span class="time-badge"><span lang="en">Nov 2025 – Apr 2026</span><span lang="ar">نوفمبر 2025 - أبريل 2026</span></span>
+              <h4><span lang="en">Technical Support Engineer</span><span lang="ar">مهندس دعم فني تقني</span></h4>
+              <span class="company"><span lang="en">BeOn (B2B SaaS) • Cairo</span><span lang="ar">شركة BeOn (منصة SaaS) • القاهرة</span></span>
+              <p><span lang="en">Diagnosed technical issues across WhatsApp API and CRMs. Dedicated to client success by supporting 70+ B2B companies, assisting them with both our core services and broader technical guidance to ensure their overall business growth and success.</span><span lang="ar">تشخيص المشكلات الفنية في WhatsApp API و CRMs. دعم أكثر من 70 شركة B2B لضمان نجاحهم من خلال تقديم الدعم التقني لخدماتنا وتوجيهات أوسع لدعم نمو أعمالهم.</span></p>
             </div>
             <div class="timeline-item">
-              <span class="time-badge">Jun 2025 – Nov 2025</span>
-              <h4>Production Planning & Data Analyst</h4>
-              <span class="company">LAVA Egypt • Cairo</span>
-              <p>Built interactive Power BI dashboards for KPI tracking, and conducted variance analysis to support business decisions.</p>
+              <span class="time-badge"><span lang="en">Jun 2025 – Nov 2025</span><span lang="ar">يونيو 2025 - نوفمبر 2025</span></span>
+              <h4><span lang="en">Production Planning & Data Analyst</span><span lang="ar">محلل تخطيط إنتاج وبيانات</span></h4>
+              <span class="company"><span lang="en">LAVA Egypt • Cairo</span><span lang="ar">شركة LAVA Egypt • القاهرة</span></span>
+              <p><span lang="en">Built interactive Power BI dashboards for KPI tracking, and conducted variance analysis to support business decisions.</span><span lang="ar">بناء لوحات تحكم تفاعلية Power BI لتتبع مؤشرات الأداء، وإجراء تحليلات التباين لدعم قرارات العمل والتخطيط.</span></p>
             </div>
           </div>
 
           <div id="education" class="timeline-box fade-in-up" style="transition-delay: 100ms;">
-            <h3>🎓 Education & Training</h3>
+            <h3>🎓 <span lang="en">Education & Training</span><span lang="ar">التعليم والتدريب</span></h3>
             <div class="timeline-item">
-              <span class="time-badge">2025 – Present</span>
-              <h4>MSc in Data Science</h4>
-              <span class="company">Cairo University</span>
-              <p>Focused on Data Analytics, Machine Learning, AI, and data-driven decision-making.</p>
+              <span class="time-badge"><span lang="en">2025 – Present</span><span lang="ar">2025 - الحاضر</span></span>
+              <h4><span lang="en">MSc in Data Science</span><span lang="ar">ماجستير في علوم البيانات</span></h4>
+              <span class="company"><span lang="en">Cairo University</span><span lang="ar">جامعة القاهرة</span></span>
+              <p><span lang="en">Focused on Data Analytics, Machine Learning, AI, and data-driven decision-making.</span><span lang="ar">التركيز على تحليل البيانات، تعلم الآلة، الذكاء الاصطناعي، وصنع القرار المبني على البيانات.</span></p>
             </div>
             <div class="timeline-item">
-              <span class="time-badge">Mar 2026 – May 2026</span>
-              <h4>Data Analysis: Skills for the Freelance Professional</h4>
-              <span class="company">NTI DEY / Creativa (120h)</span>
-              <p>Practical training in data analytics workflows, reporting, and freelance project delivery.</p>
+              <span class="time-badge"><span lang="en">Mar 2026 – May 2026</span><span lang="ar">مارس 2026 - مايو 2026</span></span>
+              <h4><span lang="en">Data Analysis for Freelancers</span><span lang="ar">تحليل البيانات للعمل الحر</span></h4>
+              <span class="company"><span lang="en">NTI DEY / Creativa (120h)</span><span lang="ar">معهد NTI / إبداع (120 ساعة)</span></span>
             </div>
             <div class="timeline-item">
-              <span class="time-badge">Oct 2025 – Dec 2025</span>
-              <h4>Data Analysis & Visualization using Power BI</h4>
-              <span class="company">AUC</span>
-              <p>Professional training focused on dashboard design, data storytelling, and business intelligence.</p>
+              <span class="time-badge"><span lang="en">Oct 2025 – Dec 2025</span><span lang="ar">أكتوبر 2025 - ديسمبر 2025</span></span>
+              <h4><span lang="en">Data Analysis using Power BI</span><span lang="ar">تحليل البيانات باستخدام Power BI</span></h4>
+              <span class="company"><span lang="en">AUC</span><span lang="ar">الجامعة الأمريكية بالقاهرة (AUC)</span></span>
             </div>
             <div class="timeline-item">
-              <span class="time-badge">Jun 2024 – Oct 2024</span>
-              <h4>Data Science Track</h4>
-              <span class="company">IBM & DEPI (210h)</span>
-              <p>Hands-on training in Data Analysis, Python, SQL, Machine Learning, and Power BI.</p>
+              <span class="time-badge"><span lang="en">Jun 2024 – Oct 2024</span><span lang="ar">يونيو 2024 - أكتوبر 2024</span></span>
+              <h4><span lang="en">Data Science Track</span><span lang="ar">مسار علوم البيانات</span></h4>
+              <span class="company"><span lang="en">IBM & DEPI (210h)</span><span lang="ar">IBM ومبادرة DEPI (210 ساعة)</span></span>
             </div>
             <div class="timeline-item">
-              <span class="time-badge">2019 – 2024</span>
-              <h4>BSc in Computer Engineering</h4>
-              <span class="company">Modern Academy for Engineering & Technology</span>
-              <p>Built strong foundation in programming, databases, and software engineering.</p>
+              <span class="time-badge"><span lang="en">2019 – 2024</span><span lang="ar">2019 - 2024</span></span>
+              <h4><span lang="en">BSc in Computer Engineering</span><span lang="ar">بكالوريوس هندسة الحاسبات</span></h4>
+              <span class="company"><span lang="en">Modern Academy for Engineering</span><span lang="ar">الأكاديمية الحديثة للهندسة والتكنولوجيا</span></span>
             </div>
           </div>
         </div>
@@ -983,19 +607,24 @@
     <section id="skills" class="skills-section">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">Discover What I Can Do</h2>
-          <p class="section-subtitle">A comprehensive toolkit to bring data to life.</p>
+          <h2 class="section-title">
+            <span lang="en">Discover What I Can Do</span><span lang="ar">اكتشف ما يمكنني فعله</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">A comprehensive toolkit to bring data to life.</span>
+            <span lang="ar">مجموعة أدوات شاملة لإحياء بياناتك وتحويلها لمعلومات.</span>
+          </p>
         </div>
 
         <div class="skills-grid fade-in-up">
-          <div class="skill-item"><span class="check-icon">✓</span> Power BI & Dashboards</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Python (Pandas, NumPy)</div>
-          <div class="skill-item"><span class="check-icon">✓</span> SQL Server & Databases</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Data Visualization</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Business Intelligence</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Machine Learning Concepts</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Microsoft Excel</div>
-          <div class="skill-item"><span class="check-icon">✓</span> Custom GPT Development</div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Power BI & Dashboards</span><span lang="ar">Power BI ولوحات التحكم</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Python (Pandas, NumPy)</span><span lang="ar">مكتبات Python للبيانات</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">SQL Server & Databases</span><span lang="ar">قواعد بيانات SQL Server</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Data Visualization</span><span lang="ar">تصور البيانات (Visualization)</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Business Intelligence</span><span lang="ar">ذكاء الأعمال (BI)</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Machine Learning Concepts</span><span lang="ar">مفاهيم تعلم الآلة (ML)</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Microsoft Excel</span><span lang="ar">إكسيل المتقدم (Excel)</span></div>
+          <div class="skill-item"><span class="check-icon">✓</span> <span lang="en">Custom GPT Development</span><span lang="ar">تطوير نماذج الذكاء الاصطناعي</span></div>
         </div>
       </div>
     </section>
@@ -1003,14 +632,24 @@
     <section id="contact" class="section">
       <div class="container">
         <div class="section-header fade-in-up">
-          <h2 class="section-title">Get In Touch</h2>
-          <p class="section-subtitle">Have a project in mind? Let's discuss how we can work together.</p>
+          <h2 class="section-title">
+            <span lang="en">Get In Touch</span><span lang="ar">تواصل معي</span>
+          </h2>
+          <p class="section-subtitle">
+            <span lang="en">Have a project in mind? Let's discuss how we can work together.</span>
+            <span lang="ar">لديك فكرة أو مشروع؟ دعنا نتحدث عن كيفية التعاون والعمل معاً.</span>
+          </p>
         </div>
 
         <div class="contact-container fade-in-up">
           <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Feel free to reach out for Data Analysis projects, AI solutions, or BI Reporting.</p>
+            <h3>
+              <span lang="en">Contact Information</span><span lang="ar">معلومات التواصل</span>
+            </h3>
+            <p>
+              <span lang="en">Feel free to reach out for Data Analysis projects, AI solutions, or BI Reporting.</span>
+              <span lang="ar">لا تتردد في التواصل معي لمناقشة مشاريع تحليل البيانات، حلول الذكاء الاصطناعي، أو تقارير BI.</span>
+            </p>
             
             <ul class="info-list">
               <li>
@@ -1019,7 +658,7 @@
               </li>
               <li>
                 <div class="info-icon">📱</div>
-                <a href="tel:+201010262040">+20 101 026 2040</a>
+                <a href="tel:+201010262040" dir="ltr">+20 101 026 2040</a>
               </li>
               <li>
                 <div class="info-icon">💼</div>
@@ -1032,20 +671,28 @@
             </ul>
           </div>
 
-          <form class="contact-form">
+          <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+            <input type="hidden" name="access_key" value="e7eb9344-38d9-40c1-83e0-3f8cebbdb497">
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
             <div class="form-group">
-              <label>Full Name</label>
-              <input type="text" placeholder="Mohamed Abbas" required>
+              <label><span lang="en">Full Name</span><span lang="ar">الاسم بالكامل</span></label>
+              <input type="text" name="name" placeholder="Mohamed Abbas" required>
             </div>
+            
             <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" placeholder="Email@example.com" required>
+              <label><span lang="en">Email Address</span><span lang="ar">البريد الإلكتروني</span></label>
+              <input type="email" name="email" placeholder="Email@example.com" required>
             </div>
+            
             <div class="form-group">
-              <label>Message</label>
-              <textarea rows="4" placeholder="How can I help you?" required></textarea>
+              <label><span lang="en">Message</span><span lang="ar">رسالتك</span></label>
+              <textarea name="message" rows="4" placeholder="..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit Message</button>
+            
+            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+              <span lang="en">Submit Message</span><span lang="ar">إرسال الرسالة</span>
+            </button>
           </form>
         </div>
       </div>
@@ -1056,23 +703,28 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <h2>M.Abbas El Sharif</h2>
-          <p>Transforming raw data into meaningful insights through Data Analysis, Business Intelligence, and AI.</p>
+          <h2>
+            <span lang="en">M.Abbas El Sharif</span><span lang="ar">م. عباس الشريف</span>
+          </h2>
+          <p>
+            <span lang="en">Transforming raw data into meaningful insights through Data Analysis, Business Intelligence, and AI.</span>
+            <span lang="ar">تحويل البيانات الخام إلى رؤى وقرارات ناجحة من خلال تحليل البيانات، ذكاء الأعمال، والذكاء الاصطناعي.</span>
+          </p>
         </div>
         
         <div class="footer-links">
-          <h4>Navigation</h4>
+          <h4><span lang="en">Navigation</span><span lang="ar">روابط سريعة</span></h4>
           <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
+            <li><a href="#about"><span lang="en">About</span><span lang="ar">نبذة عني</span></a></li>
+            <li><a href="#services"><span lang="en">Expertise</span><span lang="ar">خبراتي</span></a></li>
+            <li><a href="#projects"><span lang="en">Projects</span><span lang="ar">مشاريعي</span></a></li>
+            <li><a href="#experience"><span lang="en">Experience</span><span lang="ar">الخبرة</span></a></li>
+            <li><a href="#education"><span lang="en">Education</span><span lang="ar">التعليم</span></a></li>
           </ul>
         </div>
 
         <div class="footer-links">
-          <h4>Connect</h4>
+          <h4><span lang="en">Connect</span><span lang="ar">تواصل معي</span></h4>
           <ul>
             <li><a href="https://linkedin.com/in/mo-abbass" target="_blank">LinkedIn</a></li>
             <li><a href="https://github.com/mabbaas22" target="_blank">GitHub</a></li>
@@ -1082,12 +734,49 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2026 M.Abbas El Sharif. All Rights Reserved.</p>
+        <p>
+          <span lang="en">&copy; 2026 M.Abbas El Sharif. All Rights Reserved.</span>
+          <span lang="ar">جميع الحقوق محفوظة &copy; 2026 م. عباس الشريف.</span>
+        </p>
       </div>
     </div>
   </footer>
 
   <script>
+    // Theme & Language Controls Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const langToggle = document.getElementById('langToggle');
+    
+    // Load saved preferences from localStorage
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const currentLang = localStorage.getItem('lang') || 'en';
+    
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    
+    themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    langToggle.textContent = currentLang === 'ar' ? 'EN' : 'ع';
+
+    // Theme Switcher
+    themeToggle.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      let newTheme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Language Switcher
+    langToggle.addEventListener('click', () => {
+      let dir = document.documentElement.getAttribute('dir');
+      let newLang = dir === 'rtl' ? 'en' : 'ar';
+      let newDir = newLang === 'ar' ? 'rtl' : 'ltr';
+      
+      document.documentElement.setAttribute('dir', newDir);
+      localStorage.setItem('lang', newLang);
+      langToggle.textContent = newLang === 'ar' ? 'EN' : 'ع';
+    });
+
     // Header Scroll Effect
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -1115,6 +804,21 @@
 
     document.querySelectorAll('.fade-in-up').forEach(el => {
       observer.observe(el);
+    });
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    mobileBtn.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '80px';
+      navLinks.style.left = '0';
+      navLinks.style.width = '100%';
+      navLinks.style.background = 'var(--bg-surface)';
+      navLinks.style.padding = '1rem';
+      navLinks.style.boxShadow = 'var(--shadow-md)';
     });
   </script>
 </body>
